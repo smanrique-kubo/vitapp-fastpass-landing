@@ -1,0 +1,91 @@
+@use "../utilities/variables" as *;
+.app-general-button {
+  border-radius: 14px !important;
+  padding: 11px 15px;
+  .p-button-label {
+    letter-spacing: 0.16px;
+     font-family: "Arial";
+  }
+
+  &.dialog-button-full {
+    border-radius: 0px 0px 16px 16px;
+  }
+}
+
+.app-general-button.app-btn-transparent {
+  background: transparent !important;
+  border-color: transparent !important;
+  &:hover {
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+  .p-button-label {
+    color: $color-1a1a29 !important;
+    text-decoration: underline !important;
+  }
+  &.black{
+    justify-content: flex-start;
+    .p-button-label {
+      color: $color-black !important;
+      font-family: "Arial";
+      text-decoration: none !important;
+      font-size: 16px !important;
+    }
+  }
+  &.lined{
+    justify-content: flex-start;
+    .p-button-label {
+      color: $color-bfbfbf !important;
+      font-family: "arial-medium";
+      text-decoration: underline !important;
+      font-size: 16px !important;
+    }
+  }
+}
+
+.app-general-button.app-btn-primary {
+  background: $primary-1 !important;
+  border-color: $primary-1 !important;
+  &:hover {
+    background: $color-dbc2f5 !important;
+    border-color: $color-dbc2f5 !important;
+  }
+  .p-button-label {
+    color: $color-white !important;
+    font-size: $font-size-16 !important;
+  }
+  i {
+    color: $color-black-1 !important;
+  }
+}
+.app-general-button.app-btn-secondary {
+  background: $color-eb1c24;
+  border-color: $color-eb1c24;
+  &:hover {
+    background: $color-eb1c24;
+    border-color: $color-eb1c24;
+  }
+  .p-button-label {
+    color: #fbfbfb;
+  }
+  i {
+    color: $color-black-1;
+  }
+}
+.app-general-button.app-btn-file {
+  width: 39px;
+  height: 39px;
+  border-radius: 50% !important;
+  background: $color-white !important;
+  border-color: $color-white !important;
+  &:hover {
+    background: $color-white !important;
+    border-color: $color-white !important;
+  }
+  .p-button-icon{
+    background-color: $color-003676 !important;
+    border-color: $color-003676;
+    padding: 6px;
+    border-radius: 50%;
+  }
+}
