@@ -19,8 +19,15 @@ const openMenu = () => {
 const hiddemMenu = () => {
   menuMobile.value = false;
 };
-
-
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 onMounted(() => {
   nextTick(async () => {
     if (userData.value?.id) {
@@ -51,20 +58,21 @@ watch(
         @click="router.push(localePath({ name: 'index' }))"
       />
       <div class="pages-links">
-        <nuxt-link
-          class="link"
-          :to="localePath({ name: 'index' })"
+        <nuxt-link class="link" :to="localePath({ name: 'index' })"
           >{{ t("menu.home") }}
         </nuxt-link>
-        <nuxt-link
-          v-if="userData?.id"
-          class="link"
-          :to="localePath({ name: 'contact-us' })"
+        <nuxt-link class="link" :to="localePath({ name: 'contact-us' })"
           >{{ t("menu.contactUs") }}
         </nuxt-link>
         <Button
-        class="app-general-button app-btn-primary"
+          class="app-general-button app-btn-primary"
           :label="t('button.howWorks')"
+          @click="
+            route?.name?.includes('contact')
+              ? (router.push(localePath({ name: 'index' })),
+                scrollToSection('how-works-section'))
+              : scrollToSection('how-works-section')
+          "
         ></Button>
       </div>
       <i class="pi pi-bars icon-responsive" @click="openMenu"></i>
@@ -74,74 +82,52 @@ watch(
         <slot />
       </div>
     </main>
+    <footer class="general-footer">
+      <div class="tw-flex tw-flex-col tw-gap-3 max-lg:tw-items-center">
+        <img src="/img/logo_vitapp.png" alt="logo" width="100" height="30" />
+        <div class="tw-flex tw-items-center tw-gap-4">
+          <img
+            src="/icons/footer/ic_call.svg"
+            alt="ic_call"
+            height="20"
+            width="20"
+          />
+          <p>+57 323 8129535</p>
+        </div>
+        <div class="tw-flex tw-items-center tw-gap-4">
+          <img
+            src="/icons/footer/ic_envelop.svg"
+            alt="ic_call"
+            height="20"
+            width="20"
+          />
+
+          <p>contacto@vitapp.com</p>
+        </div>
+      </div>
+      <div class="tw-flex tw-gap-4">
+        <NuxtLink
+          to="https://www.instagram.com/vitappoficial/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="pi pi-instagram"></i>
+        </NuxtLink>
+
+        <NuxtLink
+          to="https://co.linkedin.com/company/vitapp"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="pi pi-linkedin"></i>
+        </NuxtLink>
+      </div>
+    </footer>
     <LayoutsLoginLogout
       :dialog="openLogout"
       @close-modal="openLogout = false"
     />
-    <GeneralDialog
-      v-if="showDialog"
-      v-model:show="showDialog"
-      width="559px"
-      :title="t('text.locationModal.title')"
-    >
-      <div class="content-dialog">
-        <p>
-          {{ t("text.locationModal.text") }}
-        </p>
-      </div>
-      <div class="action-buttons">
-        <Button
-          :label="t('button.notAllow')"
-          style="min-width: 151px"
-          class="app-general-button app-btn-disabled"
-          type="button"
-          @click="showDialog = false"
-        />
-        <Button
-          :label="t('button.allow')"
-          style="min-width: 151px"
-          class="app-general-button app-btn-primary"
-          type="button"
-          @click="getLocation()"
-        />
-      </div>
-    </GeneralDialog>
-    <GeneralDialog
-      v-if="openDeniedDialog"
-      v-model:show="openDeniedDialog"
-      :title="t('text.deniedPermitionsModal.title')"
-      :closable="true"
-      width="559px"
-    >
-      <div class="content-dialog">
-        <div>
-          <div class="flex gap-2">
-            <i class="pi pi-exclamation-triangle"></i>
-            <p>{{ t("text.deniedPermitionsModal.message") }}</p>
-          </div>
 
-          <div class="instructions-steps">
-            <h4>{{ t("text.deniedPermitionsModal.stepsTitle") }}</h4>
-            <ol>
-              <li>{{ t("text.deniedPermitionsModal.step1") }}</li>
-              <li>{{ t("text.deniedPermitionsModal.step2") }}</li>
-              <li>{{ t("text.deniedPermitionsModal.step3") }}</li>
-              <li>{{ t("text.deniedPermitionsModal.step4") }}</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <div class="action-buttons">
-        <Button
-          :label="t('button.understood')"
-          style="min-width: 100%"
-          class="app-general-button app-btn-primary"
-          type="button"
-          @click="openDeniedDialog = false"
-        />
-      </div>
-    </GeneralDialog>
     <DrawerMenuMobile
       v-model:visible="menuMobile"
       :showUpdateDialog="menuMobile"
@@ -213,7 +199,7 @@ watch(
 .search-icon-enter-active,
 .search-icon-leave-active {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.1s; 
+  transition-delay: 0.1s;
 }
 
 .search-icon-enter-from {

@@ -12,13 +12,10 @@
 @use "components/button";
 @use "components/dropdown";
 @use "components/texts";
-@use "components/rating";
 @use "components/popover";
+@use "components/accordion";
 @use "components/drawer";
-@use "components/slider";
 @use "components/dialog";
-@use "components/generalPicker";
-@use "components/datePicker";
 @use "components/carousel";
 @use "layouts/login";
 @use "layouts/default";
@@ -38,9 +35,9 @@ body {
 p {
   margin: 0;
   font-family: "Arial";
-  font-size: 14px;
-  color: #1a1a29;
-  font-weight: 10;
+  font-size: 16px;
+  color: #5a5a5a;
+  line-height: 24px;
 }
 
 button {
