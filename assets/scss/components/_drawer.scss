@@ -2,8 +2,13 @@
 .general-drawer {
   &.menu-mobile-drawer {
     @apply lg:tw-min-w-96 max-lg:tw-w-11/12;
+    border: none;
+    .p-drawer-header {
+      background-color: $primary-1;
+      border: none;
+    }
     .p-drawer-content {
-      @apply tw-flex tw-justify-between tw-flex-col;
+      @apply tw-flex tw-justify-between tw-flex-col tw-mt-10;
       .menu-mobile {
         position: relative;
         display: flex;
@@ -14,65 +19,17 @@
         .link {
           position: relative;
           color: $color-black;
-          font-family: "SourceSans3-SemiBold";
-          font-size: $font-size-32;
+          font-family: "Arial";
           text-decoration: none;
-          width: auto;
           cursor: pointer;
-          &.active {
-            &::after {
-              content: "";
-              z-index: 40;
-              transform: scaleX(1) translateX(0);
-              transform-origin: bottom left;
-              clip-path: polygon(
-                0 30%,
-                calc(100% - 10px) 30%,
-                calc(100% - 10px) 0,
-                100% 50%,
-                calc(100% - 10px) 100%,
-                calc(100% - 10px) 70%,
-                0 70%
-              );
-            }
-          }
+          transition: transform 0.3s ease;
+          font-size: 20px;
           &::after {
             content: "";
-            position: absolute;
-            width: 70%;
-            transform: scaleX(0) translateX(0);
-            height: 10px;
-            bottom: -8px;
-            left: -20px;
-            z-index: 40;
             transition: transform 0.25s ease-out;
-            background-color: $color-black;
-            clip-path: polygon(
-              0 30%,
-              calc(100% - 10px) 30%,
-              calc(100% - 10px) 0,
-              100% 50%,
-              calc(100% - 10px) 100%,
-              calc(100% - 10px) 70%,
-              0 70%
-            );
           }
           &:not(.active):hover {
-            opacity: 0.9;
-            &::after {
-              transform: scaleX(1) translateX(0);
-              z-index: 40;
-              transform-origin: bottom left;
-              clip-path: polygon(
-                0 30%,
-                calc(100% - 10px) 30%,
-                calc(100% - 10px) 0,
-                100% 50%,
-                calc(100% - 10px) 100%,
-                calc(100% - 10px) 70%,
-                0 70%
-              );
-            }
+            transform: scale(1.05);
           }
         }
       }
@@ -81,6 +38,11 @@
         img {
           cursor: pointer;
         }
+      }
+    }
+    .p-drawer-close-button {
+      i {
+        color: white !important;
       }
     }
   }

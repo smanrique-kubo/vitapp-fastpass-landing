@@ -66,12 +66,18 @@
 .general-input.solo-form {
   label {
     color: $color-1a1a29;
-    font-family: "arial-bold";
-    font-size: $font-size-13;
+    font-family: "Ubuntu", sans-serif;
+    font-size: $font-size-15;
+    font-weight: 400;
+    &::after {
+      color: #f00;
+      content: " *";
+    }
   }
+  textarea,
   input {
-    border-radius: 14px;
-    background: $color-f5f6fa;
+    border-radius: 5px;
+    background: $color-white;
     padding: 10px 23px;
     border: none;
     font-size: $font-size-16;

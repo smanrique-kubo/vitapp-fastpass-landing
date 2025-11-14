@@ -168,42 +168,18 @@ watch(
             </Button>
 
             <div
-              v-else-if="item.type === 'state'"
-              class="flex items-center justify-content-center"
-              :class="item.fieldClass"
+              v-else-if="item.type === 'image'"
+              class="tw-flex tw-flex-col tw-items-center tw-justify-center"
             >
-              <GeneralTableStatus
-                :id="slotProps.data.id"
-                :status="searchField(item.field, slotProps.data)"
-                :service="item.service"
-                @reload="$emit('reload')"
+              <img
+                :src="searchField(item?.icon, slotProps.data)"
+                alt="check"
+                width="16"
+                height="16"
               />
-            </div>
-
-            <p v-else-if="item.type === 'enum'">
-              {{ getEnum(searchField(item.field, slotProps.data), item.enum) }}
-            </p>
-            <p v-else-if="item.type === 'date'">
-              {{
-                useFormatDate(
-                  searchField(item.field, slotProps.data),
-                  "date-table"
-                )
-              }}
-            </p>
-
-            <div
-              v-else-if="item.type === 'rating'"
-              class="flex justify-content-center"
-            >
-              <span class="general-rating">
-                <Rating
-                  v-if="searchField(item.field, slotProps.data)"
-                  :defaultValue="searchField(item.field, slotProps.data)"
-                  disabled
-                />
-                <p v-else>N/A</p>
-              </span>
+              <p class="tw-text-[#5a5a5a] tw-text-[16px]">
+                {{ searchField(item.field, slotProps.data) }}
+              </p>
             </div>
 
             <p v-else class="m-0" :class="item.fieldClass">
@@ -225,13 +201,5 @@ watch(
         </template>
       </DataTable>
     </div>
-
-    <GeneralPaginator
-      class="mt-4"
-      v-model="pageFirst"
-      :rows="limit"
-      :total-records="pages"
-      @page="onPage($event)"
-    />
   </div>
 </template>

@@ -28,7 +28,15 @@ const drawerVisible = computed({
 const closeDrawer = () => {
   drawerVisible.value = false;
 };
-
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 watch(userData, async (newVal) => {
   // if (newVal?.user?.id) {
   //   await accountStore.getProfile();
@@ -49,10 +57,12 @@ watch(userData, async (newVal) => {
       <template #header>
         <div class="header-menu flex items-center gap-2">
           <img
-            src="/img/ic_logo_drawer.png"
+            src="/img/logo_vitapp.png"
             alt="logo"
-            width="73px"
-            height="56px"
+            width="144px"
+            height="41"
+            class="cursor-pointer"
+            @click="router.push(localePath({ name: 'index' }))"
           />
         </div>
       </template>
@@ -66,90 +76,23 @@ watch(userData, async (newVal) => {
       <div class="menu-mobile">
         <nuxt-link
           class="link"
-          :class="{
-            active: route.path.includes(localePath({ name: 'experiences' })),
-          }"
-          :to="localePath({ name: 'experiences' })"
-          @click="emit('closeModal')"
-          >{{ t("menu.experiences") }}
-        </nuxt-link>
-
-        <nuxt-link
-          class="link"
-          :class="{
-            active: route.path.includes(localePath({ name: 'treasures' })),
-          }"
-          :to="localePath({ name: 'treasures' })"
-          @click="emit('closeModal')"
-          >{{ t("menu.treasures") }}
+          :to="localePath({ name: 'index' })"
+          @click="closeDrawer"
+          >{{ t("menu.home") }}
         </nuxt-link>
         <nuxt-link
           class="link"
-          :class="{
-            active: route.path.includes(localePath({ name: 'gifts' })),
-          }"
-          :to="localePath({ name: 'gifts' })"
-          @click="emit('closeModal')"
-          >{{ t("menu.gifts") }}
-        </nuxt-link>
-        <nuxt-link
-          class="link"
-          :class="{
-            active: route.path.includes(localePath({ name: 'invitations' })),
-          }"
-          :to="localePath({ name: 'invitations' })"
-          @click="emit('closeModal')"
-          >{{ t("menu.invitations") }}
-        </nuxt-link>
-        <nuxt-link
-          class="link"
-          :class="{
-            active: route.path.includes(localePath({ name: 'myActivites' })),
-          }"
-          :to="localePath({ name: 'myActivites' })"
-          @click="emit('closeModal')"
-          >{{ t("menu.myActivites") }}
-        </nuxt-link>
-        <nuxt-link
-          v-if="userData?.id"
-          class="link"
-          :class="{ active: route.path.includes('profile') }"
-          :to="localePath({ name: 'profile' })"
-          @click="emit('closeModal')"
-          >{{ t("menu.profile") }}
+          :to="localePath({ name: 'contact-us' })"
+          @click="closeDrawer"
+          >{{ t("menu.contactUs") }}
         </nuxt-link>
         <Button
-          v-if="userData?.id"
-          class="app-general-button app-btn-transparent black p-0"
-          :pt="{
-            label: 'text-s-black',
-          }"
-          @click="emit('logout')"
-          :label="t('menu.logout')"
-        >
-        </Button>
-        <div v-else class="tw-flex tw-flex-col tw-gap-4">
-          <nuxt-link
-            class="link"
-            :class="{ active: route.path.includes('login') }"
-            :to="localePath({ name: 'login' })"
-            >{{ t("button.login") }}
-          </nuxt-link>
-          <nuxt-link
-            class="link"
-            :class="{ active: route.path.includes('register') }"
-            :to="localePath({ name: 'register' })"
-            >{{ t("button.register") }}
-          </nuxt-link>
-        </div>
+          class="app-general-button app-btn-primary"
+          :label="t('button.howWorks')"
+          @click="(scrollToSection('how-works-section'), closeDrawer())"
+        ></Button>
       </div>
       <div class="social-media">
-        <img
-          src="/icons/menu/ic_facebook.svg"
-          alt="facebook"
-          width="24px"
-          height="24px"
-        />
         <img
           src="/icons/menu/ic_instagram.svg"
           alt="facebook"
@@ -158,12 +101,6 @@ watch(userData, async (newVal) => {
         />
         <img
           src="/icons/menu/ic_linkedin.svg"
-          alt="facebook"
-          width="24px"
-          height="24px"
-        />
-        <img
-          src="/icons/menu/ic_x.svg"
           alt="facebook"
           width="24px"
           height="24px"
