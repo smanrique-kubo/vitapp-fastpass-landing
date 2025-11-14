@@ -105,6 +105,7 @@ export default {
     requestDemo: "Request Demo",
     howWorks: "How it Works",
     getStarted: "Get started",
+    submit: "Submit form",
   },
   home: {
     main: {

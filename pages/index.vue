@@ -3,6 +3,11 @@ const router = useRouter();
 const localePath = useLocalePath();
 const { t } = useI18n();
 const activeIndex = ref("0");
+const videoVisible = ref(false);
+const videoPlayer = ref(null);
+const videoUrl = ref(
+  "https://dev-kubo.s3.us-west-2.amazonaws.com/mis/media/Vitapp-English-4K.mp4"
+);
 const steps = [
   {
     icon: "/img/home/steps/ic_step_1.svg",
@@ -112,11 +117,10 @@ const carouselImg = [
   "/img/home/carousel/img_4.webp",
 ];
 
-onMounted(() => {
-  nextTick(() => {
-    router.push(localePath({ name: "home" }));
-  });
-});
+// Función para abrir el video
+const openVideo = () => {
+  videoVisible.value = true;
+};
 </script>
 
 <template>
@@ -137,13 +141,13 @@ onMounted(() => {
       </div>
     </section>
     <section class="welcome-section">
-      <div
-        class="tw-w-full tw-flex max-lg:tw-flex-column tw-justify-center tw-items-center tw-h-full tw-px-20 tw-gap-10 max-lg:tw-flex-col max-lg:tw-px-4"
-      >
+      <div class="welcome-section-container">
         <div>
           <img
             src="/img/home/img_welcome.webp"
             alt="welcome_img"
+            class="welcome-video"
+            @click="openVideo"
             width="564"
             height="564"
           />
@@ -428,22 +432,48 @@ onMounted(() => {
     </section>
     <section class="final-section">
       <div class="tw-flex tw-flex-col tw-gap-5">
-        <p class="h1-title !tw-text-[2.5rem] tw-text-left">
+        <p
+          class="h1-title lg:!tw-text-[2.5rem] max-lg:!tw-text-[24px] tw-text-left"
+        >
           {{ t("home.smart.title") }}
         </p>
-        <p>{{ t("home.smart.text") }}</p>
+        <p class="tw-text-center">{{ t("home.smart.text") }}</p>
       </div>
       <Button
-        class="app-general-button app-btn-primary tw-mt-6 tw-max-h-16"
+        class="app-general-button app-btn-primary tw-mt-6 tw-max-h-16 max-lg:tw-w-full"
         :label="t('button.requestDemo')"
         @click="router.push(localePath({ name: 'contact-us' }))"
       ></Button>
     </section>
+    <Dialog
+      v-model:visible="videoVisible"
+      modal
+      dismissableMask
+      :style="{ width: '90vw', maxWidth: '1200px' }"
+      :showHeader="false"
+      :pt="{
+        root: { class: 'video-dialog' },
+        content: { class: 'p-0' },
+      }"
+    >
+      <div class="video-container">
+        <video
+          ref="videoPlayer"
+          :src="videoUrl"
+          controls
+          autoplay
+          class="w-full"
+        >
+          Tu navegador no soporta la reproducción de videos.
+        </video>
+        <i class="pi pi-times" @click="videoVisible = false"></i>
+      </div>
+    </Dialog>
   </article>
 </template>
 <style lang="scss" scoped>
 .home-main {
-  @apply lg:tw-h-screen tw-py-5 tw-pt-20;
+  @apply lg:tw-h-screen lg:tw-py-5 max-lg:tw-py-36 lg:tw-pt-20;
   position: relative;
   background: url("/img/home/img_main.webp") no-repeat center center;
   background-size: cover;
@@ -495,11 +525,16 @@ onMounted(() => {
   );
   background-size: cover;
   background-position: center;
+  .welcome-section-container {
+    @apply tw-w-full tw-flex tw-justify-center tw-items-center tw-h-full tw-px-20 tw-gap-10 max-lg:tw-flex-col max-lg:tw-px-4;
+    .welcome-video {
+      @apply tw-cursor-pointer;
+    }
+  }
 }
 
 .works-section {
   @apply lg:tw-py-20 max-lg:tw-py-10 lg:tw-min-h-full lg:tw-max-h-[900px] tw-px-4;
-
   background-color: $color-f7faff;
   height: 100%;
   min-width: 100%;
@@ -511,6 +546,7 @@ onMounted(() => {
   }
 
   p {
+    @apply tw-text-center;
     font-family: "Inter", sans-serif;
     color: $color-black;
     font-weight: 500;
@@ -535,7 +571,7 @@ onMounted(() => {
 
       &:hover {
         transform: scale(1.05);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 50px 50px -30px #00000070;
       }
 
       .step-icon {
@@ -559,10 +595,10 @@ onMounted(() => {
       }
 
       .step-description {
+        @apply max-lg:tw-font-medium;
         font-size: 1rem;
         color: #555;
         line-height: 2rem;
-        font-weight: 10;
       }
     }
   }
@@ -578,8 +614,8 @@ onMounted(() => {
     font-weight: 500;
   }
   p {
+    @apply max-lg:tw-font-light lg:tw-font-thin;
     font-family: "Ubuntu", sans-serif;
-    font-weight: 10;
   }
 }
 .t-v-section {
@@ -624,8 +660,9 @@ onMounted(() => {
     box-shadow: 0px 50px 50px -30px #00000070;
   }
   p {
+    @apply max-lg:tw-font-light lg:tw-font-thin;
+
     font-family: "Ubuntu", sans-serif;
-    font-weight: 10;
   }
 }
 .benefits-section {
@@ -637,8 +674,9 @@ onMounted(() => {
     box-shadow: 0px 50px 50px -30px #00000070;
   }
   p {
+    @apply max-lg:tw-font-light lg:tw-font-thin;
+
     font-family: "Ubuntu", sans-serif;
-    font-weight: 10;
   }
   .img-benefit-container {
     @apply tw-flex tw-w-[56px] tw-h-[56px] tw-justify-center tw-items-center;
@@ -670,7 +708,7 @@ onMounted(() => {
   }
 }
 .final-section {
-  @apply tw-flex tw-justify-evenly tw-items-center tw-relative;
+  @apply tw-flex tw-justify-evenly tw-items-center tw-relative max-lg:tw-flex-col;
   background: linear-gradient(
     90deg,
     rgb(77, 9, 206) 0%,

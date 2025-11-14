@@ -10,18 +10,18 @@ const { handleSubmit, errors, meta, resetForm } = useForm({
   validationSchema: toTypedSchema(
     z.object({
       firstName: z
-        .string({ message: t("rule.validation.requireForm") })
-        .min(1, { message: t("rule.validation.requireForm") }),
+        .string({ message: t("rule.validation.require") })
+        .min(1, { message: t("rule.validation.require") }),
       surname: z
-        .number({ message: t("rule.validation.requireForm") })
-        .min(1, { message: t("rule.validation.requireForm") }),
+        .number({ message: t("rule.validation.require") })
+        .min(1, { message: t("rule.validation.require") }),
       email: z
         .string({ message: t("rule.validation.requireEmail") })
-        .email({ message: t("rule.validation.email") })
+        .email({ message: t("rule.validation.requireEmail") })
         .min(1, { message: t("rule.validation.requireEmail") }),
       message: z
-        .string({ message: t("rule.validation.requireEmail") })
-        .min(1, { message: t("rule.validation.requireEmail") }),
+        .string({ message: t("rule.validation.require") })
+        .min(1, { message: t("rule.validation.require") }),
     })
   ),
 });
@@ -30,6 +30,9 @@ const { value: firstName } = useField<string>("firstName");
 const { value: surname } = useField<string>("surname");
 const { value: email } = useField<string>("email");
 const { value: message } = useField<string>("message");
+const onSubmit = handleSubmit((values) => {
+  console.log(values);
+});
 </script>
 <template>
   <article>
@@ -45,9 +48,11 @@ const { value: message } = useField<string>("message");
     </section>
     <section class="form-section">
       <div
-        class="tw-flex tw-w-full tw-items-cemter tw-justify-center max-lg:tw-flex-col"
+        class="tw-flex tw-w-full tw-items-cemter tw-justify-center max-lg:tw-flex-col max-lg:tw-gap-8"
       >
-        <div class="tw-w-1/2 tw-flex tw-flex-col tw-gap-4 tw-max-w-[590px]">
+        <div
+          class="lg:tw-w-1/2 tw-flex tw-flex-col tw-gap-4 lg:tw-max-w-[590px]"
+        >
           <h2 class="form-title">
             {{ t("contact.form.title") }}
           </h2>
@@ -84,7 +89,7 @@ const { value: message } = useField<string>("message");
             class="contact-image"
           />
         </div>
-        <form class="form-container">
+        <form @submit.prevent="onSubmit" class="form-container">
           <h2 class="form-title">
             {{ t("contact.form.fields.title") }}
           </h2>
@@ -108,8 +113,8 @@ const { value: message } = useField<string>("message");
                 t("contact.form.fields.lastName")
               }}</label>
               <InputText
-                v-model="surname"
                 v-keyfilter="/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/"
+                v-model="surname"
                 type="text"
               />
               <GeneralInputError :error="errors['surname']" />
@@ -117,11 +122,7 @@ const { value: message } = useField<string>("message");
           </div>
           <span class="general-input solo-form">
             <label for="email">{{ t("contact.form.fields.email") }}</label>
-            <InputText
-              v-model="email"
-              v-keyfilter="/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/"
-              type="email"
-            />
+            <InputText v-model="email" type="email" />
             <GeneralInputError :error="errors['email']" />
           </span>
           <span class="general-input solo-form">
@@ -130,7 +131,13 @@ const { value: message } = useField<string>("message");
               v-model="message"
               style="resize: none; height: 204px"
             ></Textarea>
+            <GeneralInputError :error="errors['message']" />
           </span>
+          <Button
+            class="app-general-button app-btn-primary"
+            :label="t('button.submit')"
+            type="submit"
+          ></Button>
         </form>
       </div>
     </section>
@@ -159,10 +166,10 @@ const { value: message } = useField<string>("message");
   height: 100%;
   min-width: 100%;
   .contact-image {
-    @apply tw-w-[518px] tw-h-[518px] tw-rounded-3xl;
+    @apply lg:tw-w-[518px] lg:tw-h-[518px] max-lg:tw-w-full max-lg:tw-h-full tw-rounded-3xl;
   }
   .form-container {
-    @apply tw-w-1/2 tw-rounded-md tw-p-10 tw-gap-3 tw-flex tw-flex-col;
+    @apply lg:tw-w-1/2 tw-rounded-md tw-p-10 tw-gap-3 tw-flex tw-flex-col;
     @apply tw-max-w-[590px];
     box-shadow: 0px 4px 8px -2px rgba(0, 0, 0, 0.1);
     background: linear-gradient(
