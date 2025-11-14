@@ -267,7 +267,7 @@ const openVideo = () => {
         :pages="100"
         :offset="0"
       />
-      <div class="tw-w-full lg:tw-hidden">
+      <div class="tw-w-full lg:tw-hidden tw-flex tw-flex-col tw-items-center">
         <Accordion :value="activeIndex" class="general-accordion">
           <AccordionPanel
             v-for="(field, index) in fields"
@@ -395,10 +395,12 @@ const openVideo = () => {
         width="50"
         height="50"
       />
-      <span class="h1-title !tw-text-[2.5rem] !tw-text-black !tw-text-left">
+      <span
+        class="h1-title !tw-text-[2.5rem] !tw-text-black lg:!tw-text-left max-lg:tw-text-center"
+      >
         {{ t("home.custom.title") }}
       </span>
-      <p>
+      <p class="max-lg:tw-text-center">
         {{ t("home.custom.text") }}
       </p>
       <div>
@@ -408,9 +410,7 @@ const openVideo = () => {
           <div v-for="(step, index) in 4" :key="index" class="tw-flex">
             <Card
               class="custom-card"
-              style="max-width: 263px"
               :style="{
-                maxWidth: '263px',
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/home/custom/img_${index + 1}.webp')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -670,12 +670,12 @@ const openVideo = () => {
   height: 100%;
   min-width: 100%;
   .benefit-image {
-    @apply tw-w-full tw-h-full tw-object-cover tw-max-w-[556px] tw-min-h-[661px] tw-rounded-3xl;
+    @apply lg:tw-w-full lg:tw-h-full tw-object-cover lg:tw-max-w-[556px] lg:tw-min-h-[661px] tw-rounded-3xl;
+    @apply max-lg:tw-w-full max-lg:tw-h-full;
     box-shadow: 0px 50px 50px -30px #00000070;
   }
   p {
     @apply max-lg:tw-font-light lg:tw-font-thin;
-
     font-family: "Ubuntu", sans-serif;
   }
   .img-benefit-container {
@@ -685,13 +685,13 @@ const openVideo = () => {
   }
 }
 .custom-section {
-  @apply lg:tw-py-20 max-lg:tw-py-10 lg:tw-min-h-full lg:tw-max-h-[900px] tw-px-4;
+  @apply lg:tw-py-20 max-lg:tw-py-10 lg:tw-min-h-full  tw-px-4;
   @apply tw-flex tw-flex-col tw-gap-4 tw-items-center;
   height: 100%;
   min-width: 100%;
   .custom-card {
     @apply lg:tw-w-[285px] tw-h-[518px] tw-flex tw-flex-col tw-justify-center tw-items-center;
-
+    @apply max-lg:tw-w-[300px];
     transition:
       transform 0.3s ease,
       box-shadow 0.3s ease;
