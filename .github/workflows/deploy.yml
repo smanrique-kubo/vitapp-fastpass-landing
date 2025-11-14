@@ -3,7 +3,7 @@ name: Deploy Frontend
 on:
   push:
     branches:
-      - staging
+      - production
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       - name: Setup Remote SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 400 ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.SERVER }} >> ~/.ssh/known_hosts
 
