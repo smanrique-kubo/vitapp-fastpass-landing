@@ -1,107 +1,103 @@
 export default {
   application: "Stack Front",
-  loading: "Cargando, por favor espere...",
+  loading: "Loading, please wait...",
   rol: {
-    admin: "Administrador",
-    ops: "Operador",
+    admin: "Administrator",
+    ops: "Operator",
   },
   title: {
-    welcome: "Bienvenido",
-    login: "Iniciar sesión",
-    forgotPassword: "Recuperar contraseña",
-    validateCode: "Recuperar contraseña",
-    changePassword: "Restablecer contraseña",
-    logout: "¿Estás seguro de querer cerrar la sesión?",
+    welcome: "Welcome",
+    login: "Login",
+    forgotPassword: "Recover password",
+    validateCode: "Recover password",
+    changePassword: "Reset password",
+    logout: "Are you sure you want to log out?",
   },
 
   rule: {
-    form: "Por favor revisa la información",
-    image: "Debe seleccionar una imagen",
+    form: "Please check the information",
+    image: "You must select an image",
     validation: {
-      require: "El dato es requerido para continuar",
-      requireEmail: "El correo es requerido para continuar",
+      require: "The data is required to continue",
+      requireEmail: "Email is required to continue",
       value: {
-        min: "Debe ser mayor o igual a {data}",
-        max: "Debe ser inferior o igual a {data}",
+        min: "Must be greater than or equal to {data}",
+        max: "Must be less than or equal to {data}",
       },
       length: {
-        min: "Debe contener al menos {data} carácteres",
-        max: "No puede contener más de {data} carácteres",
+        min: "Must contain at least {data} characters",
+        max: "Cannot contain more than {data} characters",
       },
-      email: "Debe ser una dirección de correo válida",
+      email: "Must be a valid email address",
       password: {
-        valid: "Mín. 8 caracteres alfanuméricos: 1 mayúscula, 1 minúscula",
-        confirm: "Las contraseñas deben coincidir",
+        valid: "Min. 8 alphanumeric characters: 1 uppercase, 1 lowercase",
+        confirm: "Passwords must match",
       },
-      number: "El dato es solo numérico",
+      number: "The data is numeric only",
     },
   },
   store: {
     apiServices: {
-      sessionExpired:
-        "Su sesión ha expirado, por favor inicie sesión nuevamente",
-      loginRequired: "Debe ingresar sus credenciales para continuar",
-      timeOut:
-        "Ha tardado demasiado en responder. Intente nuevamente más tarde",
-      notFound:
-        "No se encontró la url solicitada. Intente nuevamente más tarde",
-      generalError:
-        "Ocurrió un error en el servidor. Intente nuevamente más tarde",
+      sessionExpired: "Your session has expired, please log in again",
+      loginRequired: "You must enter your credentials to continue",
+      timeOut: "It took too long to respond. Please try again later",
+      notFound: "The requested URL was not found. Please try again later",
+      generalError: "A server error occurred. Please try again later",
     },
   },
   text: {
-    login: "Por favor digita tu correo electrónico",
+    login: "Please enter your email",
   },
   table: {
     empty: {
-      title: "Lo sentimos",
-      message: "Lamentablemente no tenemos datos que mostrar.",
+      title: "We're sorry",
+      message: "Unfortunately we have no data to display.",
     },
-    loading: "Cargando... Por favor aguarde un momento",
+    loading: "Loading... Please wait a moment",
     state: {
-      title: "Estado",
-      active: "Activo",
-      inactive: "Inactivo",
+      title: "Status",
+      active: "Active",
+      inactive: "Inactive",
     },
     admin: {
-      name: "Nombre y correo",
-      role: "Rol",
+      name: "Name and email",
+      role: "Role",
     },
     enums: {
       role: {
-        administrative: "Administrativo",
-        superadmin: "Super Administrador",
-        operative: "Operativo",
+        administrative: "Administrative",
+        superadmin: "Super Administrator",
+        operative: "Operative",
       },
       status: {
-        active: "Activo",
-        inactive: "Inactivo",
+        active: "Active",
+        inactive: "Inactive",
       },
     },
     filters: {
-      all: "Todos",
-      search: "Buscar",
+      all: "All",
+      search: "Search",
     },
   },
   paginator: {
-    display: "Mostrar",
-    entries: "Registros",
-    page: "Página",
-    from: "de",
-    previousPage: "Anterior",
-    nextPage: "Siguiente",
+    display: "Display",
+    entries: "Records",
+    page: "Page",
+    from: "of",
+    previousPage: "Previous",
+    nextPage: "Next",
   },
   menu: {
-    logout: "Cerrar sesión",
+    logout: "Log out",
     home: "Home",
     contactUs: "Contact Us",
-    notFound: "404 - Página no encontrada",
+    notFound: "404 - Page not found",
   },
   breadcrumb: {
-    vehicleList: "Buscar vehículos",
+    vehicleList: "Search vehicles",
   },
   button: {
-    login: "Iniciar sesión",
+    login: "Login",
     requestDemo: "Request Demo",
     howWorks: "How it Works",
     getStarted: "Get started",
@@ -122,13 +118,13 @@ export default {
       steps: {
         1: {
           name: "step 1",
-          title: "Comprehensive Health Assessmen",
-          text: "Quick individual surveys enriched with health data, lab results and medical records provide a complete view of each individual’s health.",
+          title: "Comprehensive Health Assessment",
+          text: "Quick individual surveys enriched with health data, lab results and medical records provide a complete view of each individual's health.",
         },
         2: {
           name: "step 2",
           title: "Advanced Risk Detection",
-          text: "Vitapp’s proprietary algorithm powered by AI analyzes more than 500 health risk segments, continuously tracking changes and improvements.",
+          text: "Vitapp's proprietary algorithm powered by AI analyzes more than 500 health risk segments, continuously tracking changes and improvements.",
         },
         3: {
           name: "step 3",
@@ -169,7 +165,7 @@ export default {
           3: "Integrated data & lifestyle",
           4: "AI-driven adaptive",
           5: "Multi-channel access",
-          6: "Scalable acroos organizations",
+          6: "Scalable across organizations",
           7: "Population level",
         },
         traditional: {
@@ -242,14 +238,14 @@ export default {
   contact: {
     main: {
       title: "Request A Demo",
-      text: "Use the form below, Whatsapp or email. We’re here to assist you and answer your queries.",
+      text: "Use the form below, WhatsApp or email. We're here to assist you and answer your queries.",
     },
     form: {
       title: "Contact Us",
       colombia: "Colombia",
       fields: {
         title: "Form",
-        text: "Use the form below to request a demo. We’ll get back to you as soon as possible.",
+        text: "Use the form below to request a demo. We'll get back to you as soon as possible.",
         firstName: "First Name",
         lastName: "Last Name",
         email: "Email",
